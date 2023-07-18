@@ -85,4 +85,18 @@ public class CarController {
         carService.insertCar(car);
         return JSONResult.ok();
     }
+
+    @PostMapping("buy/{carId}/{count}")
+    public JSONResult buyCar(@PathVariable Integer carId, @PathVariable Integer count) {
+        String result = carService.buyById(carId, count);
+        return JSONResult.ok(result);
+    }
+
+    @GetMapping("fuzzyFindByCarName/{carName}/{start}/{end}")
+    public JSONResult fuzzyFindByCarName(@PathVariable String carName,
+                                         @PathVariable Long start,
+                                         @PathVariable Long end) {
+        List<Car> cars = carService.fuzzyFindByCarName(carName, start, end);
+        return JSONResult.ok(cars);
+    }
 }
